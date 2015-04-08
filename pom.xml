@@ -8,5 +8,7 @@
     <modules>
         <module>1-hello-world</module>
         <module>2-add-dependency</module>
+        <module>3-web-app</module>
     </modules>
+
 </project>

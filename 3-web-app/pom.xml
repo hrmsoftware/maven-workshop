@@ -1,0 +1,53 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>se.hrmsoftware.labb</groupId>
+    <artifactId>web-project</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+
+    <name>HelloWorld Web Application</name>
+    <description>En webb-applikation som exponerar HelloWorld som en servlet</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>se.hrmsoftware.labb</groupId>
+            <artifactId>hello-world-project</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Används Java8 -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <!-- Vi använder servlet 3.x och behöver tala om för WAR-pluginet att inte gnälla på
+                avsaknad av web.xml -->
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <!-- Definiera Jettys web-server plugin. -->
+            <!-- Den finns inte definierad i 'root-pomen', därför måste vi deklarera den explicit. -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.3.0.M2</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
