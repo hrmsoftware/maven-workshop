@@ -1,0 +1,24 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>se.hrmsoftware.labb</groupId>
+    <artifactId>hellow</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>se.hrmsoftware.labb</groupId>
+            <artifactId>hello-world-project</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+
+            <!-- Vi behöver assembly pluginet igen!! -->
+            <!-- Vi behöver jar pluginet, hint, Main-Class:!! -->
+
+        </plugins>
+
+    </build>
+
+</project>
