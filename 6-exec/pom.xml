@@ -1,0 +1,17 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>se.hrmsoftware.labb</groupId>
+    <artifactId>execute-it</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <build>
+        <plugins>
+
+            <!--TODO kunde vara kul kanske att köra tidigare skapad exekverbar jar här.  -->
+            <!-- Använd exec pluginet för att köra "java -version" -->
+
+        </plugins>
+
+    </build>
+
+</project>
