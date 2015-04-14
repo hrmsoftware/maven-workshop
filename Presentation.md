@@ -8,9 +8,22 @@
 
 * Ett "byggverktyg" ----> "a project management tool".
 * En standardiserad modell för att hantera ett projekts livscykel, etc.
+* Det överlägset vanligaste verktyget. Andra alternativ som erbjuder delvis samma modell:
+    - Gradle (Groovy)
+    - Simple Build Tool (Scala)
+    - Leiningen (Clojure)
+    - Ant (XML)
 * Deklarativ modell - beskriv 'vad', inte 'hur' (känns det igen?)
     - Convention over Configuration
 * POM (Project Object Model)
+
+* Maven in the bigger picture ..
+    - JDK
+    - Build
+    - Distribute
+    - JVM
+    - IDE
+    - etc.
 
 ## Convention over Configuration
 
