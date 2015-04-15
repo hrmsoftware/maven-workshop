@@ -11,6 +11,7 @@
         <module>3-web-app</module>
         <module>4-assembly</module>
         <module>5-executable-jar-with-assembly</module>
+        <module>6-exec</module>
     </modules>
 
 </project>

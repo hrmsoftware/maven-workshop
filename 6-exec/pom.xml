@@ -7,8 +7,6 @@
     <build>
         <plugins>
 
-            <!--TODO kunde vara kul kanske att köra tidigare skapad exekverbar jar här.  -->
-            <!-- Använd exec pluginet för att köra "java -version" -->
 
         </plugins>
 
