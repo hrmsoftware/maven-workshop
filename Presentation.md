@@ -1,4 +1,4 @@
-# Maven Workshop
+# Apache Maven
 
 ## Vad är Maven?
 
@@ -22,38 +22,9 @@
     - IDE
     - etc.
 
-## Hur kör man Maven
-
-* Java-versionen i `$JAVA_HOME` används - eller den i "pathen".
-
-    `mvn clean`
-    `mvn clean install`
-    `mvn install -Dmaven.test.skip=true`
-    `mvn install -Pfoo`
-
-## Convention over Configuration
-
-Ett fördefinierat sätt .. källkod, tester, etc.
-
-   [maven-module]
-        ├── pom.xml
-        ├── src
-        │   ├── main
-        │   │   ├── java
-        │   │   └── resources
-        │   └── test
-        │       ├── java
-        │       └── resources
-        └── target
-            └── classes
-
-
-CoC - består i Mavens fall av en deklarativ projektmodell (POM), en väldefinierad uppsättning 'faser', samt en standardiserad konfigurationsuppsättning av en antal standard-plugins. That's it.
-
-* Compiler-pluginets default-konfiguration letar efter `src/main/java` och skriver klasser till `target/classes`.
-* Resource-pluginet letar efter resurser i `src/main/resources` etc.
-
 ## The 'POM'
+
+> <https://maven.apache.org/pom.html>
 
 * Visa en 'minimal POM'.
     <project>
@@ -70,14 +41,40 @@ CoC - består i Mavens fall av en deklarativ projektmodell (POM), en väldefinie
 * groupId - a set of related artifacts.
 * artifactId - main identifier
 * Version?
-    - SNAPSHOT version?
 * classifier
     - zip, tar.gz etc.
     - java6 vs. java8
 * Project inheritance
     - reactor build
 
+## Convention over Configuration
+
+> <https://en.wikipedia.org/wiki/Convention_over_configuration>
+
+~~~~~~~~~~~~~~~~~~~~~~
+[maven-module]
+    ├── pom.xml
+    ├── src
+    │   ├── main
+    │   │   ├── java
+    │   │   └── resources
+    │   └── test
+    │       ├── java
+    │       └── resources
+    └── target
+        └── classes
+~~~~~~~~~~~~~~~~~~~~~~
+
+- `mvn help:effective-pom`
+
+CoC - består i Mavens fall av en deklarativ projektmodell (POM), en väldefinierad uppsättning 'faser', samt en standardiserad konfigurationsuppsättning av en antal standard-plugins. That's it.
+
+* Compiler-pluginets default-konfiguration letar efter `src/main/java` och skriver klasser till `target/classes`.
+* Resource-pluginet letar efter resurser i `src/main/resources` etc.
+
 ## Build Lifecycles
+
+> <https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html>
 
 * A life-cycle consists of a series of phases
 
@@ -101,11 +98,40 @@ CoC - består i Mavens fall av en deklarativ projektmodell (POM), en väldefinie
     - The JAR plugin binds 'jar:jar' to 'package' (to create a JAR-file).
     - WAR, EJB, EAR etc.
 
+## Hur kör man Maven
+
+Java-versionen i `$JAVA_HOME` används - eller den i "pathen".
+
+~~~~~~~~~~~~~~~~~~
+mvn clean
+mvn clean install
+mvn install -Dmaven.test.skip=true
+mvn install -Pfoo
+~~~~~~~~~~~~~~~~~~
+
 ## Plugins
 
 Vad är de, och - på hög nivå - hur interagerar de med livscykelns olika faser och POM.
 
+* [Help Plugin](https://maven.apache.org/plugins/maven-help-plugin/plugin-info.html)
+
 ## Dependencies (Beroenden)
+
+> <https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html>
+
+~~~~~~~~~~~~~~~~~
+<dependencies>
+    <dependency>
+        <groupId>com.foo</groupId>
+        <artifactId>bar</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <!-- Optional: -->
+        <scope>compile</scope>
+        <classifier>java5</classifier>
+        <type>jar</type>
+    </dependency>
+</dependencies>
+~~~~~~~~~~~~~~~~~
 
 * Koordinat
 * Scopes
@@ -116,7 +142,10 @@ Vad är de, och - på hög nivå - hur interagerar de med livscykelns olika fase
     - system 
     - optional dependencies
 * Versions
-    - version ranges.
+    - version ranges `[inkl, excl)`
+    - Snapshot version
+
+* Transient dependencies?
 
 
 ## Repositories
@@ -138,4 +167,11 @@ Vad är de, och - på hög nivå - hur interagerar de med livscykelns olika fase
 * [Hemsidan](http://maven.apache.org)
 * [Boken](http://books.sonatype.com/mvnref-book/reference/)
 * [Artifakter](http://search.maven.org)
+
+## Övningar
+
+* <https://github.com/hrmsoftware/maven-workshop>
+* `svn checkout https://github.com/hrmsoftware/maven-workshop`
+* `git clone https://github.com/hrmsoftware/maven-workshop.git`
+* [Tanka ZIP](https://github.com/hrmsoftware/maven-workshop/archive/master.zip)
 
