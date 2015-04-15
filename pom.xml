@@ -6,7 +6,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>1-hello-world</module>
         <module>2-add-dependency</module>
         <module>3-web-app</module>
         <module>4-assembly</module>
