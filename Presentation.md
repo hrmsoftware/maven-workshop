@@ -160,6 +160,8 @@ mvn test
 >
 > Dependencies on dependencies of my direct dependencies ...
 
+`mvn dependency:tree`
+
 ## Profiles
 
 > Ett sätt att tillfälligt överlagra vissa delar av POM.
