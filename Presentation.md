@@ -156,7 +156,7 @@ mvn test
 
 ## Dependencies
 
-> Vad är *Transienta Dependencies*?
+> Vad är *Transitiva Dependencies*?
 >
 > Dependencies on dependencies of my direct dependencies ...
 
