@@ -3,7 +3,9 @@
 * Vad?
     - Byggverktyg -- Projekt Management Tool
     - Överlägset vanligaste verktyget för Java-baserade projekt.
-    - 
+    - En del i en kedja
+        - Kapslar in de vanligaste behoven vid mjukvaruutveckling.
+    - En standardiserad modell (convention over configuration) baserad på en väldefinierad livscykel.
 
 * Varför?
     - Deklarativ - stabilare över tid
@@ -12,6 +14,7 @@
     - Bättre support för modulbaserad utveckling
     - Få styr på dependencies (fler utvecklare)
     - "Works on my computer" isn't good enough
+    - Repeatable builds
 
 * POM - Project Object Model
     - Deklarativ modell
@@ -19,9 +22,9 @@
     - "Vad, inte Hur".
         - Beskriv vad projektet/modulen består av, låt "Convention over Configuration" göra jobbet.
     - **Minimal POM**
-        - GroupID
-        - ArtifactID
-        - Version
+        - GroupID: a set of related artifacts
+        - ArtifactID: main identifier
+        - Version: version (ner senare)
         - Implicit
             - Packaging: JAR
             - Classifier: `<none>`
@@ -34,6 +37,7 @@
     - Vår enkla POM ärver från en "Super-POM"
         - Definierar CoC genom förkonfigurerade _Plugins_.
         - Visa med `mvn help:effective-pom`
+        - CoC - består i Mavens fall av en deklarativ projektmodell (POM), en väldefinierad uppsättning 'faser', samt en standardiserad konfigurationsuppsättning av en antal standard-plugins. That's it.
     - Följer man standard-layouten så räcker det med en enkel POM för att kunna:
         - kompilera
         - köra enhetstester
@@ -68,6 +72,12 @@
         - etc. etc.
     - Det *enda* sättet att omsätta den deklarativa modellen till faktiskt *exekvering* av nånting.
     - Ett sätt att registrera callbacks till JAVA_KOD vid vissa *faser* i livscykeln.
+    - Vanliga plugins
+        - release-plugin
+            - Subversion/Git, Branching/Tagging, Verification, Distribution
+        - code-coverage
+        - WAR-plugin
+        - etc.
     - Skriva egna plugins? <https://maven.apache.org/plugin-developers/index.html>
 
 * Repositories
@@ -82,18 +92,24 @@
 
 * Dependencies
     - Ett projekt 'deklarerar' att det finns en dependency till andra moduler/projekt:
-    - *Visa exempel*
     - Koordinaten
     - Scope:
-        - compile
-        - provided
-        - runtime
-        - test
-        - system
+        - compile: I classpathen
+        - provided: I classpathen, men tar ej med sig transienta deps. Används för att deklarera beroende på en "managerad" dependency (OSGi, Servlets etc.).
+        - runtime: Behövs i runtime, men ej vid kompilering
+        - test: i classpathen vid test
+        - system: undantag - används för att peka ut lokala dependencies.
     - Versioner
         - Kan anges som en 'range'
         - SNAPSHOT versions?
+            - Undvik SNAPSHOT-dependencies!
     - Vad är transienta dependencies?!
+        - **Rita på tavlan**
+
+* Profiles
+    - Varför?
+    - Vissa aktiviteter vill man inte alltid köra. T.ex. vissa tester.
+    - Windows vs. -Riktiga-Andra OS.
 
 * Frågor
 

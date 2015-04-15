@@ -1,11 +1,29 @@
 # Apache Maven
 
+## Agenda
+
+* Vad?
+* Varför?
+* POM - Project Object Model
+* Convention over Configuration
+* Build lifecycle
+* Plugins
+* Repositories
+* Dependencies
+* *Hämta macka*
+* Övningar
+
 ## Vad är Maven?
 
 > <http://maven.apache.org>
- 
 
-~~~~~~~~~~~~~~~~~
+* Byggverktyg
+* .. eller Project Management Tool?
+* Överlägset vanligaste verktyget för Java-plattformen.
+* Deklarativ modell
+
+## Maven in Context
+
 * Platform: JVM / JDK
     * Compile & Package: [.java] -> [.class] -> [.jar]
         * **Build Tool**: (Maven, SBT, Leiningen, Gradle, etc.)
@@ -13,52 +31,37 @@
         * IDE (Eclipse, VIM, IntelliJ etc.)
     * Release Management
     * Deploy to Server
-~~~~~~~~~~~~~~~~~
 
-* Ett "byggverktyg" ----> "a project management tool".
-* En standardiserad modell för att hantera ett projekts livscykel, etc.
-* Det överlägset vanligaste verktyget. Andra alternativ som erbjuder delvis samma modell:
-    - Gradle (Groovy)
-    - Simple Build Tool (Scala)
-    - Leiningen (Clojure)
-    - Ant (XML)
-* Deklarativ modell - beskriv 'vad', inte 'hur' (känns det igen?)
-    * POM (Project Object Model)
-    - Convention over Configuration
+## Varför Maven?
 
-* Maven in the bigger picture ..
-
-    - Java Toolset (compiler / runtime)
-    - Compile .java -> .class -> .jar
-    - Other features: unit-testing, javadoc, code analyzis, etc.
-    - Distribute -> Upload, Deploy
-    - IDE
-    - etc.
+- 'Best Practices'
+- Deklarativ ('What' - not 'How')
+- Modulbaserad utveckling
+- Dependencies
+- Ett verktyg för build, package, distribute, release
+- Upprepningsbara byggen
 
 ## The 'POM'
 
 > <https://maven.apache.org/pom.html>
 
-* Visa en 'minimal POM'.
-    <project>
-        <modelVersion>4.0.0</modelVersion>
-        <groupId>se.hrmsoftware.labb</groupId>
-        <artifactId>hello-world-project</artifactId>
-        <version>1</version>
-    </project>
+~~~~~~~~~~~~~~~~~
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>se.hrmsoftware.labb</groupId>
+    <artifactId>hello-world-project</artifactId>
+    <version>1</version>
+</project>
+~~~~~~~~~~~~~~~~~
 
-* The "Super POM"
-    - Defines all "default" plugins and their configuration. This is what establishes the 'convention'.
-    - Ergo: everything can be overriden.
-* packaging (default: jar).
-* groupId - a set of related artifacts.
-* artifactId - main identifier
-* Version?
-* classifier
-    - zip, tar.gz etc.
-    - java6 vs. java8
-* Project inheritance
-    - reactor build
+## The 'POM' - Goals
+
+~~~~~~~~~~~~~~~~~~
+mvn clean
+mvn clean install
+mvn install -Dmaven.test.skip=true
+mvn test
+~~~~~~~~~~~~~~~~~~
 
 ## Convention over Configuration
 
@@ -78,55 +81,44 @@
         └── classes
 ~~~~~~~~~~~~~~~~~~~~~~
 
-- `mvn help:effective-pom`
+## CoC - "Super POM"
 
-CoC - består i Mavens fall av en deklarativ projektmodell (POM), en väldefinierad uppsättning 'faser', samt en standardiserad konfigurationsuppsättning av en antal standard-plugins. That's it.
-
-* Compiler-pluginets default-konfiguration letar efter `src/main/java` och skriver klasser till `target/classes`.
-* Resource-pluginet letar efter resurser i `src/main/resources` etc.
+    mvn help:effective-pom
 
 ## Build Lifecycles
 
 > <https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html>
 
-* A life-cycle consists of a series of phases
+### default life-cycle
 
-- clean
-    * pre-clean
-    * **clean**
-    * post-clean
-
-- default life-cycle
-    * **validate** 
-    * generate-sources process-sources generate-resources process-resources **compile** process-classes
-    * generate-test-sources process-test-sources generate-test-resources process-test-resources **test-compile**
-    * **test**
-    * prepare-package **package**
-    * pre-integration-test integration-test post-integration-test
-    * verify
-    * **install**
-    * **deploy**
-
-* Package-specific plugins use these phases to bind behavior 
-    - The JAR plugin binds 'jar:jar' to 'package' (to create a JAR-file).
-    - WAR, EJB, EAR etc.
-
-## Hur kör man Maven
-
-Java-versionen i `$JAVA_HOME` används - eller den i "pathen".
-
-~~~~~~~~~~~~~~~~~~
-mvn clean
-mvn clean install
-mvn install -Dmaven.test.skip=true
-mvn install -Pfoo
-~~~~~~~~~~~~~~~~~~
+* **validate** 
+* generate-sources process-sources generate-resources process-resources **compile** process-classes
+* generate-test-sources process-test-sources generate-test-resources process-test-resources **test-compile**
+* **test**
+* prepare-package **package**
+* pre-integration-test integration-test post-integration-test
+* verify
+* **install**
+* **deploy**
 
 ## Plugins
 
-Vad är de, och - på hög nivå - hur interagerar de med livscykelns olika faser och POM.
+> Ett sätt att associera exekverbar kod till olika faser i ett projekts livscykel.
 
 * [Help Plugin](https://maven.apache.org/plugins/maven-help-plugin/plugin-info.html)
+* Compiler Plugin
+* JAR Plugin
+* WAR, Code Coverage, Release etc.
+* Skriv dina egna: <https://maven.apache.org/plugin-developers/index.html>
+
+## Repositories
+
+* Local Repository: 
+    * `$HOME/.m2/repository`
+
+* Remote Repository
+    - Maven Central
+    - HRM Nexus
 
 ## Dependencies (Beroenden)
 
@@ -146,40 +138,46 @@ Vad är de, och - på hög nivå - hur interagerar de med livscykelns olika fase
 </dependencies>
 ~~~~~~~~~~~~~~~~~
 
-* Koordinat
-* Scopes
-    - compile
-    - provided
-    - runtime 
-    - test
-    - system 
-    - optional dependencies
-* Versions
-    - version ranges `[inkl, excl)`
-    - Snapshot version
+## Dependencies (Scopes)
 
-* Transient dependencies?
+- compile
+- provided
+- runtime 
+- test
+- system 
 
+## Dependencies (Version)
 
-## Repositories
+- Ranges
+    - `[4, 5)`
+- SNAPSHOT
+    - Utvecklingsversionen av ett projekt.
+    - 15.1-SNAPSHOT - utvecklingsversionen av 15.1-releasen.
 
-* install vs. deploy
+## Dependencies
 
-* Local repos
-* Remote repos
-    - remote repo defined in POM.
-    - mirrors
-* Global repos
+> Vad är *Transienta Dependencies*?
+>
+> Dependencies on dependencies of my direct dependencies ...
 
 ## Profiles
 
-* Ett sätt att villkorligt definiera utökningar till en POM. T.ex. `-P`, men även genom andra sätt (env-parametrar etc.).
+> Ett sätt att tillfälligt överlagra vissa delar av POM.
+
+    mvn clean install -Pesa
+
+* Kan initieras på vissa miljöparametrar
+* Java-properties
 
 ## Länkar
 
 * [Hemsidan](http://maven.apache.org)
 * [Boken](http://books.sonatype.com/mvnref-book/reference/)
 * [Artifakter](http://search.maven.org)
+
+## Frågor?
+
+## Hämta macka!
 
 ## Övningar
 
