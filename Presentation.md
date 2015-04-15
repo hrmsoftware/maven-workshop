@@ -2,6 +2,19 @@
 
 ## Vad är Maven?
 
+> <http://maven.apache.org>
+ 
+
+~~~~~~~~~~~~~~~~~
+* Platform: JVM / JDK
+    * Compile & Package: [.java] -> [.class] -> [.jar]
+        * **Build Tool**: (Maven, SBT, Leiningen, Gradle, etc.)
+        * Unit Testing, Javadoc, Code Analysis, Distribution etc.
+        * IDE (Eclipse, VIM, IntelliJ etc.)
+    * Release Management
+    * Deploy to Server
+~~~~~~~~~~~~~~~~~
+
 * Ett "byggverktyg" ----> "a project management tool".
 * En standardiserad modell för att hantera ett projekts livscykel, etc.
 * Det överlägset vanligaste verktyget. Andra alternativ som erbjuder delvis samma modell:

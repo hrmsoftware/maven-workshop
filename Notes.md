@@ -1,14 +1,17 @@
 # Maven Workshop Notes
 
 * Vad?
-
+    - Byggverktyg -- Projekt Management Tool
+    - Överlägset vanligaste verktyget för Java-baserade projekt.
+    - 
 
 * Varför?
     - Deklarativ - stabilare över tid
-    - Modulärt uppbyggd
+        - separera projektbeskrivning från 'implementation'.
+        - uppgradera Maven, behåll samma projektbeskrivning
+    - Bättre support för modulbaserad utveckling
     - Få styr på dependencies (fler utvecklare)
     - "Works on my computer" isn't good enough
-
 
 * POM - Project Object Model
     - Deklarativ modell
